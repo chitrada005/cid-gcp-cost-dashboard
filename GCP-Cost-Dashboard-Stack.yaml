@@ -44,7 +44,7 @@ Metadata:
         Type: String
         Description: GCP Pricing Full Table Id List - To copy a table id, please click on the three dots on the right of the table name and select \"Copy ID\" # DOCUMENTATION
 
-      GCPFocusFullTableName
+      GCPFocusFullTableName:
         Type: CommaDelimitedList
         Description: (Optional) GCP Focus Full Table Id List - To copy a table id, please click on the three dots on the right of the table name and select \"Copy ID\" # DOCUMENTATION
 
