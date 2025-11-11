@@ -591,6 +591,7 @@ Resources:
               request_type = event.get('RequestType', 'Undef')
               region = boto3.session.Session().region_name
               log_url = f"https://{region}.console.aws.amazon.com/cloudwatch/home?region={region}#logEvent:group={context.log_group_name};stream={context.log_stream_name}"
+              physicalResourceId = "CustomResourcePhysicalId"
               try:
                   # Get environment variables
                   env_vars = get_env_vars()
@@ -602,10 +603,10 @@ Resources:
                   else:
                       raise Exception(f'Unexpected request_type = {request_type}')
                       
-                  cfnresponse.send(event, context, cfnresponse.SUCCESS, response)
+                  cfnresponse.send(event, context, cfnresponse.SUCCESS, response, physicalResourceId)
               except Exception as exc:
                   error_msg = f'{str(exc)} See logs: {log_url}'
-                  cfnresponse.send(event, context, cfnresponse.FAILED, {'Error': error_msg})
+                  cfnresponse.send(event, context, cfnresponse.FAILED, {'Error': error_msg}, physicalResourceId)
       Handler: index.lambda_handler
       Role: !GetAtt GCPLambdaRole.Arn
       FunctionName: !Sub "${Prefix}-GCPGlueGenerator"
